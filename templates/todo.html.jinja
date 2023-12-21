@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+
+<title> To do list</title>
+<style>
+
+body {background-color: rgb(112, 142, 202);
+
+}
+li { color: azure;
+border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 50px 20px;}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<h1 style='text-align:center'> To do list</h1>
+<h1>
+<ul>
+{%for todo in todos%}
+<li>{{todo}}</li>
+{%endfor%}
+</ul>
+
+</h1>
+<form method="post">
+<input name = "new_todo">
+<input type = "submit">
+
+</form>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
