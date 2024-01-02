@@ -1,4 +1,4 @@
-from flask import Flask, render_template , request
+from flask import Flask, render_template , request, redirect
 app = Flask(__name__)
 
 todo = ['Pass all my classes for the year', 'Graduate Highschool']
@@ -14,3 +14,8 @@ def index():
         'todo.html.jinja', todos= todo
                       
         )
+
+@app.route('/delete_todo/<int:todo_index>', methods =['POST'])
+def todo_delete(todo_index):
+    del todo[todo_index]
+    return redirect('/')
