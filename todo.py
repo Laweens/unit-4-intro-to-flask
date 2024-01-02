@@ -5,8 +5,11 @@ todo = ['Pass all my classes for the year', 'Graduate Highschool']
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    new_todo = request.form['new_todo']
-    todo.append(new_todo)
+    if request.method == 'POST':
+        new_todo = request.form['new_todo']
+        todo.append(new_todo)
+    
+    
     return render_template( 
         'todo.html.jinja', todos= todo
                       
