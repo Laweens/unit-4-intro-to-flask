@@ -30,7 +30,8 @@ button{
 {%for todo in todos%}
 <li>
 {{todo['description']}}
-<form method="POST" action="delete_todo/{{loop.index0}}"><input type="Submit" value="Delete"></form>
+<form method="POST" action="/delete_todo/{{loop.index0}}">
+<input type="Submit" value="Delete"></form>
 </li>
 {%endfor%}
 </ul>

@@ -26,13 +26,13 @@ def index():
         todo.append(new_todo)
         cursor = connect.cursor()
         cursor.execute(f"INSERT INTO `todos` (description) VALUES ('{new_todo}')")
-        cursor.close
+        cursor.close()
 
 
     cursor = connect.cursor()
     cursor.execute("SELECT * FROM `todos`")
     results = cursor.fetchall()
-    cursor.close      
+    cursor.close()     
 
     return render_template( 
         'todo.html.jinja', 
@@ -41,5 +41,13 @@ def index():
 
 @app.route('/delete_todo/<int:todo_index>', methods =['POST'])
 def todo_delete(todo_index):
-    del todo[todo_index]
+    cursor = connect.cursor()
+    
+    cursor.execute(f"DELETE FROM `todos` WHERE `id` = {todo_index}")
+
+    cursor.close()
+    connect.commit()
+
+
+
     return redirect('/')
