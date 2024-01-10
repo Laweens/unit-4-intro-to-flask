@@ -27,10 +27,11 @@ def index():
         cursor = connect.cursor()
         cursor.execute(f"INSERT INTO `todos` (description) VALUES ('{new_todo}')")
         cursor.close()
+        connect.commit()
 
 
     cursor = connect.cursor()
-    cursor.execute("SELECT * FROM `todos`")
+    cursor.execute("SELECT * FROM `todos` ORDER BY `complete` ")
     results = cursor.fetchall()
     cursor.close()     
 
@@ -47,7 +48,17 @@ def todo_delete(todo_index):
 
     cursor.close()
     connect.commit()
+    
+    return redirect('/')
 
+@app.route('/complete_todo/<int:todo_index>', methods =['POST'])
+def complete_todo(todo_index):
+    cursor = connect.cursor()
+    
+    cursor.execute(f"UPDATE `todos` set `complete` = 1 WHERE `id` = {todo_index}")
+
+    cursor.close()
+    connect.commit()
 
 
     return redirect('/')
